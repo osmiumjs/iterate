@@ -740,6 +740,7 @@ export async function iterateKeysParallel<Source, Mapper = undefined, MapperFlag
 	return iterateParallel<Source, Mapper, MapperFlagUndefined>(values, cb as any, map, mapUndefined, true);
 }
 
+/** @warning WIP, do not use */
 export async function iterateParallelLimit<Source, Mapper = undefined, MapperFlagUndefined = undefined>(
 	limit: number,
 	values: Source & Iterate.Iterable,
@@ -758,7 +759,7 @@ export async function iterateParallelLimit<Source, Mapper = undefined, MapperFla
 		const pr = iterateSync<number, Promise<any>[], MapperFlagUndefined>(limit - 1, (_: any, key: any, iter: any) => {
 			if (cnt >= length) return iter.break();
 			cnt++;
-			console.log('M', idx, limit, key);
+
 			const cursor = ((idx - 1) * limit) + key;
 
 			const param = instance.getByIndex(cursor, values);
