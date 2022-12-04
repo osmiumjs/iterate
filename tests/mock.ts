@@ -117,6 +117,31 @@ export function mockNotIterable() {
 	return {iteratedValues, indexes, outValues, outIndexes};
 }
 
+export function mockSeriesPageableRange() {
+	const args = [
+		{start: 1001, end: 1101, inPage: 22},
+		{start: 1000, end: 1100, inPage: 25}
+	];
+
+	const result = [
+		[
+			[1001, 1022],
+			[1023, 1044],
+			[1045, 1066],
+			[1067, 1088],
+			[1089, 1101]
+		], [
+			[1000, 1024],
+			[1025, 1049],
+			[1050, 1074],
+			[1075, 1099],
+			[1100, 1100]
+		]
+	];
+
+	return {args, result};
+}
+
 export function delay(rand: boolean = false) {
 	return new Promise((resolve) => !rand ? setImmediate(resolve) : setTimeout(resolve, Math.random() * 100));
 }

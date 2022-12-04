@@ -3,11 +3,11 @@ import {
 	isArray,
 	isMap,
 	isSet,
-	isNumber,
 	isObject,
 	isString,
 	isUndefined,
-	isNull, isNumeric,
+	isNull,
+	isNumeric,
 } from '@osmium/is';
 
 export class Iterate<Source, Mapper, MapperFlagUndefined> {
@@ -740,8 +740,27 @@ export async function iterateKeysParallel<Source, Mapper = undefined, MapperFlag
 	return iterateParallel<Source, Mapper, MapperFlagUndefined>(values, cb as any, map, mapUndefined, true);
 }
 
+export function seriesPageableRange(start: number, end: number, inPage: number): [number, number][] {
+	const delta = end - start;
+	let count = Math.ceil(delta / inPage);
+
+	return iterateKeysSync(count, (idx, _, iter) => {
+		const from = start + (inPage * idx);
+
+		if (from + inPage >= end) {
+			if (from + inPage === end) {
+				iter.getStates().map.push([from, end - 1]);
+				return [end, end];
+			}
+			return [from, end];
+		}
+
+		return [from, from + inPage - 1];
+	}, [] as [number, number][]);
+}
+
 /** @warning WIP, do not use */
-export async function iterateParallelLimit<Source, Mapper = undefined, MapperFlagUndefined = undefined>(
+async function iterateParallelLimit<Source, Mapper = undefined, MapperFlagUndefined = undefined>(
 	limit: number,
 	values: Source & Iterate.Iterable,
 	cb: Iterate.Callback<Source, Mapper, MapperFlagUndefined, true>,
