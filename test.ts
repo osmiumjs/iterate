@@ -1,6 +1,15 @@
 ///TEST AREA
-import {iterate, iterateAsync, iterateKeysParallel, iterateKeysSync, iterateParallel, iterateParallelLimit, iterateSync} from './src';
-import {delay}                                                                                                           from './tests/mock';
+import {iterate, iterateAsync, iterateKeysParallel, iterateKeysSync, iterateParallel, iterateSync, seriesPageableRange} from './src';
+import {delay}                                                                                                          from './tests/mock';
+
+iterate([1, 2, 3], (val, idx) => {
+	console.log(val, idx);
+});
+
+process.exit();
+
+
+console.log(seriesPageableRange(1000, 1001, 25));
 
 const val1 = ['sdf', 6, 77];
 
@@ -40,14 +49,12 @@ const val4 = new Map<[string, number], [boolean, number]>([[['bla', 4], [true, 3
 type VVA = { [key: string]: string };
 
 (async () => {
-	const vg: (string)[] = [];
+	const data: string[] = ['a', 'b'];
 
-	const a = await iterateParallelLimit(2, val7, async (val, idx, iter) => {
-		await delay(true);
-		console.log('T', val, idx);
+	const res=await iterateAsync(data, async (value, index, iter) => {
+		iter.key(value);
+		return index
+	}, {} as Record<string, number>);
 
-		return `${val}:sadfs`;
-	}, [] as any[]);
-
-	console.log('>>', a);
+	console.log(res);
 })();

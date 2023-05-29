@@ -71,6 +71,12 @@ Reference: `iterateSync(values: Iterable, cb: (value, idx, control: Control)=> m
 
 Iterate `values` using synchronously callback, mapping result also synchronously.
 ```
+iterateSync([1, 2, 3], (val, idx)=>{
+    console.log(val, idx);    
+});
+// 1 0
+// 2 1
+// 3 2
 ```
 
 #### iterateAsync
@@ -78,6 +84,12 @@ Reference: `iterateAsync(values: Iterable, cb: async(value, idx, control: Contro
 
 Iterate `values` using asynchronously callback, mapping result also asynchronously.
 ```
+await iterateSync([1, 2, 3], async(val, idx)=>{
+    console.log(val, idx);    
+});
+// 1 0
+// 2 1
+// 3 2
 ```
 
 #### iterate

@@ -759,36 +759,35 @@ export function seriesPageableRange(start: number, end: number, inPage: number):
 	}, [] as [number, number][]);
 }
 
-/** @warning WIP, do not use */
-async function iterateParallelLimit<Source, Mapper = undefined, MapperFlagUndefined = undefined>(
+export async function iterateParallelLimit<Source>(
 	limit: number,
 	values: Source & Iterate.Iterable,
-	cb: Iterate.Callback<Source, Mapper, MapperFlagUndefined, true>,
-	map?: (Mapper & Iterate.Mappable) | undefined,
-	mapUndefined?: MapperFlagUndefined extends boolean | undefined ? MapperFlagUndefined : undefined,
+	cb: Iterate.Callback<Source, undefined, undefined, true>,
 	iterateKeys: boolean = false
-): Promise<(Mapper extends undefined ? void : Mapper)[]> {
-	const instance = Iterate.createInstance<Source, Mapper, MapperFlagUndefined>();
+): Promise<void> {
+	const instance = Iterate.createInstance<Source, undefined, undefined>();
 	const length = instance.valuesLength(values);
 	let cnt = 0;
 
-	if (!length) return [];
+	if (!length) return;
 
-	return await iterateAsync<number, any[]>(Math.ceil(length / limit), async (idx: number) => {
-		const pr = iterateSync<number, Promise<any>[], MapperFlagUndefined>(limit - 1, (_: any, key: any, iter: any) => {
+	await iterateAsync<number, any[]>(Math.ceil(length / limit), async (idx: number) => {
+		const pr = iterateSync<number, Promise<any>[], undefined>(limit, (_: any, key: any, iter: any) => {
 			if (cnt >= length) return iter.break();
 			cnt++;
 
 			const cursor = ((idx - 1) * limit) + key;
 
 			const param = instance.getByIndex(cursor, values);
-			console.log(cursor, values);
 			if (!param) return;
 
-			return (async () => cb(param.value, param.idx, iter))();
+			return (async () => iterateKeys ? cb(param.idx, param.value, iter) : cb(param.value, param.idx, iter))();
 
 		}, [] as Promise<any>[]);
 
-		return Promise.all(pr);
-	}, []);
+		await Promise.all(pr);
+		return;
+	});
+
+	return;
 }
