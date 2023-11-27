@@ -1,7 +1,8 @@
 // noinspection JSVoidFunctionReturnValueUsed,DuplicatedCode
 
-import {iterateSync}     from '../src';
-import {mockNotIterable} from './mock';
+import {iterateSync}          from '../src';
+import {mockNotIterable}      from './mock';
+import {describe, it, expect} from 'vitest';
 
 describe('iterateSync - notIterable', () => {
 	it('Iterate null', () => {

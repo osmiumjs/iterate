@@ -2,6 +2,7 @@
 
 import {iterateAsync}               from '../src';
 import {mockSet, mockString, delay} from './mock';
+import {describe, it, expect}       from 'vitest';
 
 describe('iterateAsync - String', () => {
 	it('Iterate', async () => {

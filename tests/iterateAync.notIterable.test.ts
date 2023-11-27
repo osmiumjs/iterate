@@ -2,6 +2,7 @@
 
 import {iterateAsync}           from '../src';
 import {delay, mockNotIterable} from './mock';
+import {describe, it, expect}   from 'vitest';
 
 describe('iterateAsync - notIterable', () => {
 	it('Iterate null', async () => {

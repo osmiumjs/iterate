@@ -1,7 +1,8 @@
 // noinspection JSVoidFunctionReturnValueUsed,DuplicatedCode
 
-import {iterateSync} from '../src';
-import {mockSet}     from './mock';
+import {iterateSync}          from '../src';
+import {mockSet}              from './mock';
+import {describe, it, expect} from 'vitest';
 
 describe('iterateSync - Set', () => {
 	it('Iterate', () => {

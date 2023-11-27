@@ -2,6 +2,7 @@
 
 import {iterate}                                                                                                        from '../src';
 import {mockArray, mockMap, mockNotIterable, mockNumber, mockObject, mockObjectIterator, mockSet, mockString, mockTrue} from './mock';
+import {describe, it, expect}                                                                                           from 'vitest';
 
 describe('iterate - Sync', () => {
 	it('Array', () => {

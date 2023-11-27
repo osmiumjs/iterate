@@ -2,6 +2,7 @@
 
 import {iterateSync, seriesPageableRange}  from '../src';
 import {mockSeriesPageableRange, mockTrue} from './mock';
+import {describe, it, expect}              from 'vitest';
 
 describe('seriesPageableRange', () => {
 	it('Correct result', () => {

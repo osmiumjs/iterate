@@ -2,6 +2,7 @@
 
 import {iterateAsync}               from '../src';
 import {delay, mockNumber, mockSet} from './mock';
+import {describe, it, expect}       from 'vitest';
 
 describe('iterateAsync - Number', () => {
 	it('Iterate', async () => {

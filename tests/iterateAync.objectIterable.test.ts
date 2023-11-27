@@ -2,6 +2,7 @@
 
 import {iterateAsync}              from '../src';
 import {mockObjectIterator, delay} from './mock';
+import {describe, it, expect}      from 'vitest';
 
 describe('iterateAsync - Object with [Symbol.iterator]', () => {
 	it('Iterate', async () => {

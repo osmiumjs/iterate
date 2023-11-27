@@ -2,6 +2,7 @@
 
 import {iterateSync}             from '../src';
 import {mockArray, mockMappings} from './mock';
+import {describe, it, expect}    from 'vitest';
 
 describe('iterateSync - Arrays - Mappable', () => {
 	it('Iterate', () => {

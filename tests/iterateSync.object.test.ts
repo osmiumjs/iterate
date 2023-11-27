@@ -2,6 +2,7 @@
 
 import {iterateSync}                    from '../src';
 import {mockObject, mockObjectIterator} from './mock';
+import {describe, it, expect}           from 'vitest';
 
 describe('iterateSync - Object', () => {
 	it('Iterate', () => {
