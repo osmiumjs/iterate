@@ -2,7 +2,7 @@
 	"name"           : "@osmium/iterate",
 	"description"    : "A powerful, type-safe iteration library for JavaScript and TypeScript with advanced mapping, parallel processing, and flow control features",
 	"license"        : "MIT",
-	"version"        : "0.3.0",
+	"version"        : "0.3.1",
 	"author"         : {
 		"name" : "Vasiliy Isaichkin",
 		"email": "vasiliy@isaichkin.ru"
@@ -40,8 +40,7 @@
 		"lint:check"    : "eslint src tests --ext .ts --max-warnings 0",
 		"build"         : "npm run lint:check && npm run test && npm run clean && npm run compile && npm run compress",
 		"prepublishOnly": "npm run build",
-		"format:package": "node scripts/format-package-json.js",
-		"postinstall"   : "npm run format:package"
+		"format:package": "node scripts/format-package-json.js"
 	},
 	"main"           : "./dist/index.js",
 	"types"          : "./defs/index.d.ts",
